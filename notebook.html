@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NoteBook</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .nav{
+            background-color: rgb(187, 5, 5);
+            padding: 30px;
+            padding-left: 20px;
+            color: aliceblue;
+            position: sticky;
+            top: 0;
+        }
+        .contain{
+            margin: 20px;
+        }
+        .book{
+            margin-left: 25px;
+            width: 20%;
+            background-color: black;
+            padding: 10px;
+            line-height: 20px;
+            border-radius: 10px;
+            color: antiquewhite;
+            border: none;
+            margin:10px;
+            text-align: justify;
+            text-indent: 15px;
+            display: inline-block;
+            vertical-align: top;
+        }
+        .book h2,.book h4{
+            margin-top: 10px;
+            margin-bottom: 10px;
+            color: brown;
+           text-transform: uppercase;
+            font-weight: bold;
+        }
+        .book button{
+            margin: 20px;
+            padding: 10px;
+            background-color: white;
+            color: black;
+            outline: none;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        .addbtn{
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            padding: 20px;
+            background-color: rgb(199, 45, 39);
+            border: none;
+            border-radius: 100%;
+            font-size: 30px;
+            cursor: pointer;
+        }
+        .over{
+            background-color: black;
+            opacity: 0.8;
+            height: 100%;
+            width: 100%;
+            position: relative;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            display: none;
+        }
+        .addbook{
+            background-color: brown;
+            position: relative;
+            position: absolute;
+            top: 100px;
+            left: 230px;
+            z-index: 2;
+            box-sizing: border-box;
+            padding: 20px;
+            border-radius: 10px;
+            border: none;
+            display: none;
+        }
+        .addbook h1{
+            margin-bottom: 10px;
+        }
+        .addbook input,.addbook textarea{
+            padding: 10px;
+            outline: none;
+            background-color: transparent;
+            margin-bottom: 10px;
+            width: 90%;
+            border: none;
+            border-radius: 10px;
+            border-bottom: 3px solid black;
+            color: white;
+            font-size: 17px;
+        }
+    
+        .addbook textarea{
+            height: 100px;
+        }
+        
+        .addbook textarea::placeholder{
+            color: white;
+        }
+        .addbook input::placeholder{
+            color: white;
+        }
+        .btn{
+            margin: 20px;
+            padding: 15px;
+            padding-left: 20px;
+            padding-right: 20px;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            background-color: black;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <h1>NoteBook</h1>
+    </div>
+    <div class="contain">
+        <div class="book">
+            <h2>Calculus</h2>
+            <h4>Thangappandi Issac</h4>
+            <p>This book tells the details of the Calculus maths Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta vero nisi quis impedit nemo necessitatibus perspiciatis culpa reiciendis exercitationem, saepe dolor libero at aliquid quo fugiat! Obcaecati delectus iste vitae?</p>
+            <button onclick="del(event)">Delete</button>
+        </div>
+    </div>
+
+    <div class="over"></div>
+    <div class="addbook">
+        <h1>ADD BOOK</h1>
+        <input type="text" placeholder="Enter book title" id="in-text">
+        <input type="text" placeholder="Enter author Name" id="in-author">
+        <textarea placeholder="Short Description of the book" height="800px" width="800px" id="in-des"></textarea>
+        <button class="btn" onclick="addbook()">Add</button>
+        <button class="btn" id="cl">Close</button>
+    </div>
+
+    <button class="addbtn" onclick="add()">+</button>
+
+
+
+    <script>
+        var overlay=document.querySelector(".over")
+        var bookadd=document.querySelector(".addbook")
+        var closing=document.getElementById("cl")
+        var containers=document.querySelector(".contain")
+        var title=document.getElementById("in-text")
+        var author=document.getElementById("in-author")
+        var descripe=document.getElementById("in-des")
+        function add()
+        {
+            overlay.style.display="block"
+            bookadd.style.display="block"
+        }
+        closing.addEventListener("click",function(){  overlay.style.display="none"
+            bookadd.style.display="none" })
+        function del(event)
+        {
+            event.target.parentElement.remove()
+        }
+
+        function addbook()
+        {
+            var cre= document.createElement("div")
+            cre.setAttribute("class","book")
+            cre.innerHTML=` <h2>${title.value}</h2>
+            <h4>${author.value}</h4>
+            <p>${descripe.value}</p>
+            <button onclick="del(event)">Delete</button>`
+            containers.append(cre)
+        }
+    </script>
+</body>
+</html>
